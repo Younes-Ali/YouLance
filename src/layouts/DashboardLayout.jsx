@@ -3,10 +3,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Briefcase, LayoutDashboard, FolderKanban, Users,
   FileText, Clock, BarChart2, Settings, LogOut,
-  Bell, Search, ChevronRight, Menu, X, Moon,
+  Bell, ChevronRight, Menu, X,
 } from "lucide-react";
+import  useGetUser  from "../hooks/useGetUser";
 
 const glass = "bg-white/5 backdrop-blur-xl border border-white/10";
+
 
 const NAV = [
   { label: "Overview",  icon: LayoutDashboard, to: "/dashboard",            color: "text-blue-400"  },
@@ -21,12 +23,15 @@ const NAV = [
 function Sidebar({ open, onClose }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, loading, error } = useGetUser();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
     navigate("/signin");
   };
+
+
 
   return (
     <>
@@ -41,19 +46,19 @@ function Sidebar({ open, onClose }) {
       <aside
         className={`
           fixed top-0 left-0 h-full z-40 w-64 flex flex-col
-          bg-[#060614]/95 backdrop-blur-2xl border-r border-white/[0.06]
+          bg-[#060614]/95 backdrop-blur-2xl border-r border-white/6
           transition-transform duration-300 ease-in-out
           ${open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
       >
         {/* Logo */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-white/[0.06]">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-white/6">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.5)]">
+            <div className="w-8 h-8 rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.5)]">
               <Briefcase size={15} className="text-white" />
             </div>
             <span className="text-white font-bold text-lg tracking-tight">
-              Free<span className="text-indigo-400">Lance</span>
+              You<span className="text-indigo-400">Lance</span>
             </span>
           </Link>
           <button onClick={onClose} className="lg:hidden text-white/40 hover:text-white">
@@ -62,16 +67,16 @@ function Sidebar({ open, onClose }) {
         </div>
 
         {/* User mini-card */}
-        <div className="px-4 py-4 border-b border-white/[0.06]">
+        <div className="px-4 py-4 border-b border-white/6">
           <div className={`${glass} rounded-2xl p-3 flex items-center gap-3`}>
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-              AR
+            <div className="w-9 h-9 rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
+              {user ? user.username.split(" ")[0].charAt(0).toUpperCase() + user.username.split(" ")[1].charAt(0).toUpperCase() : "U"}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-white text-sm font-semibold truncate">Alex Rivera</p>
-              <p className="text-white/35 text-xs truncate">alex@example.com</p>
+              <p className="text-white text-sm font-semibold truncate">{user ? user.username : "User"}</p>
+              <p className="text-white/35 text-xs truncate">{user ? user.email : "user@example.com"}</p>
             </div>
-            <ChevronRight size={14} className="text-white/20 flex-shrink-0" />
+            <ChevronRight size={14} className="text-white/20 shrink-0" />
           </div>
         </div>
 
@@ -92,7 +97,7 @@ function Sidebar({ open, onClose }) {
                   transition-all duration-150 relative overflow-hidden
                   ${active
                     ? "bg-white/8 text-white"
-                    : "text-white/45 hover:text-white hover:bg-white/[0.05]"
+                    : "text-white/45 hover:text-white hover:bg-white/5"
                   }
                 `}
               >
@@ -120,7 +125,7 @@ function Sidebar({ open, onClose }) {
         </nav>
 
         {/* Logout */}
-        <div className="px-4 py-4 border-t border-white/[0.06]">
+        <div className="px-4 py-4 border-t border-white/6">
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/40 hover:text-red-400 hover:bg-red-500/8 transition-all duration-150 group"
@@ -136,8 +141,9 @@ function Sidebar({ open, onClose }) {
 
 /* ── TOPBAR ── */
 function Topbar({ onMenuClick, title }) {
+  const { user, loading, error } = useGetUser();
   return (
-    <header className={`sticky top-0 z-20 ${glass} border-b border-white/[0.06] px-6 py-4 flex items-center justify-between gap-4`}>
+    <header className={`sticky top-0 z-20 ${glass} border-b border-white/6 px-6 py-4 flex items-center justify-between gap-4`}>
       <div className="flex items-center gap-4">
         <button
           onClick={onMenuClick}
@@ -149,14 +155,7 @@ function Topbar({ onMenuClick, title }) {
       </div>
 
       <div className="flex items-center gap-3">
-        {/* Search */}
-        <div className={`hidden md:flex items-center gap-2 ${glass} rounded-xl px-3 py-2 w-52`}>
-          <Search size={14} className="text-white/25 flex-shrink-0" />
-          <input
-            placeholder="Search…"
-            className="bg-transparent text-white/70 text-sm outline-none placeholder-white/20 w-full"
-          />
-        </div>
+        
 
         {/* Notifications */}
         <button className={`relative ${glass} rounded-xl p-2.5 text-white/50 hover:text-white transition-colors`}>
@@ -165,8 +164,8 @@ function Topbar({ onMenuClick, title }) {
         </button>
 
         {/* Avatar */}
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm cursor-pointer shadow-[0_0_12px_rgba(99,102,241,0.4)]">
-          AR
+        <div className="w-9 h-9 rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm cursor-pointer shadow-[0_0_12px_rgba(99,102,241,0.4)]">
+          {user ? user.username.split(" ")[0].charAt(0).toUpperCase() + user.username.split(" ")[1].charAt(0).toUpperCase() : "U"}
         </div>
       </div>
     </header>
@@ -176,6 +175,13 @@ function Topbar({ onMenuClick, title }) {
 /* ── DASHBOARD LAYOUT ── */
 export default function DashboardLayout({ children, title = "Dashboard" }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+  if (!token) {
+    navigate("/signin");
+  } 
 
   return (
     <div className="min-h-screen flex">

@@ -1,5 +1,6 @@
 import { Briefcase, Shield, Star, Zap } from "lucide-react";
 import { glass } from "../../../../public/styles/PublicStyles";
+import { Link } from "react-router-dom";
 
 export default function BrandPanel() {
   const perks = [
@@ -26,9 +27,9 @@ export default function BrandPanel() {
 
       {/* Logo */}
       <div className="relative flex items-center gap-2">
-        <div className="w-10 h-10 rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-[0_0_25px_rgba(99,102,241,0.6)]">
+        <Link to={"/"} className="w-10 h-10 rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-[0_0_25px_rgba(99,102,241,0.6)]">
           <Briefcase size={20} className="text-white" />
-        </div>
+        </Link>
         <span className="text-white font-bold text-2xl tracking-tight">Free<span className="text-indigo-400">Lance</span></span>
       </div>
 

@@ -1,12 +1,5 @@
 import { useState, useEffect } from "react";
 
-
-/* ─────────────────────────── GLASS HELPERS ─────────────────────────── */
-const glass =
-  "bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]";
-const glassHover =
-  "hover:bg-white/[0.08] hover:border-white/20 hover:shadow-[0_12px_48px_rgba(99,102,241,0.2)] transition-all duration-500";
-/* ─────────────────────────── COUNTER HOOK ─────────────────────────── */
 export default function useCounter(end, duration = 2000, start = false) {
   const [count, setCount] = useState(0);
   useEffect(() => {

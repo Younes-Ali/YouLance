@@ -7,6 +7,7 @@ import Step2 from "../components/auth/signup/Step2";
 import Step3 from "../components/auth/signup/Step3";
 import BrandPanel from "../components/auth/signup/BrandPanel";
 import { glass } from "../../public/styles/PublicStyles";
+import { Link } from "react-router-dom";
 
 export default function SignUpPage() {
   const [step, setStep] = useState(0);
@@ -43,9 +44,9 @@ export default function SignUpPage() {
           {/* Mobile logo */}
           {!done && (
             <div className="flex lg:hidden items-center gap-2 mb-8">
-              <div className="w-9 h-9 rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
+              <Link to={"/"} className="w-9 h-9 rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
                 <Briefcase size={17} className="text-white" />
-              </div>
+              </Link>
               <span className="text-white font-bold text-xl">Free<span className="text-indigo-400">Lance</span></span>
             </div>
           )}

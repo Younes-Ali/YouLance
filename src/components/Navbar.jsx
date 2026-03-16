@@ -9,6 +9,7 @@ import {
   FolderKanban,
 } from "lucide-react";
 import { glass } from "../../public/styles/PublicStyles";
+import useGetUser from "../hooks/useGetUser";
 
 
 /* ─────────────────────────── NAV CONFIG ─────────────────────────── */
@@ -56,6 +57,9 @@ const navLinks = [
     ],
   },
 ];
+
+
+const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
 /* ─────────────────────────── SMART NAVIGATE HOOK ─────────────────────────── */
 // Handles both plain routes (/dashboard) and hash routes (/#features, /about#team)
@@ -147,6 +151,10 @@ export default function Navbar() {
   const location = useLocation();
   const smartNavigate = useSmartNavigate();
 
+  const { user, loading, error } = useGetUser();
+
+
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", fn);
@@ -232,16 +240,31 @@ export default function Navbar() {
         </ul>
 
         {/* ── Desktop CTA ── */}
-        <div className="hidden md:flex items-center gap-3 shrink-0">
-          <Link to={"/signin"} className="text-white/60 hover:text-white text-sm font-medium transition-colors px-4 py-2">
-            Sign In
-          </Link>
-          <Link to={"/signup"} className="relative px-5 py-2.5 rounded-xl text-sm font-semibold text-white overflow-hidden group">
-            <span className="absolute inset-0 bg-linear-to-r from-indigo-600 to-violet-600 group-hover:from-indigo-500 group-hover:to-violet-500 transition-all duration-300" />
-            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.15),transparent_70%)] transition-opacity duration-300" />
-            <span className="relative">Get Started Free</span>
-          </Link>
-        </div>
+
+        {
+          !user?(
+              <div className="hidden md:flex items-center gap-3 shrink-0">
+                <Link to={"/signin"} className="text-white/60 hover:text-white text-sm font-medium transition-colors px-4 py-2">
+                  Sign In
+                </Link>
+                <Link to={"/signup"} className="relative px-5 py-2.5 rounded-xl text-sm font-semibold text-white overflow-hidden group">
+                  <span className="absolute inset-0 bg-linear-to-r from-indigo-600 to-violet-600 group-hover:from-indigo-500 group-hover:to-violet-500 transition-all duration-300" />
+                  <span className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.15),transparent_70%)] transition-opacity duration-300" />
+                  <span className="relative">Get Started Free</span>
+                </Link>
+              </div>
+          ):(
+                  <div className="hidden pt-2 pb-1 px-1 md:flex flex-col gap-2">
+                    <span className="bg-linear-to-r from-indigo-600 to-violet-600 text-white text-center flex-1 py-3 px-3 rounded-xl border border-white/10 text-lg font-semibold transition-colors">
+                      {loading ? "Loading..." : error ? "Error loading user" : `Hello, ${user.username.split(" ")[0].charAt(0).toUpperCase() + user.username.split(" ")[0].slice(1) || "User"}`}
+                    </span>
+                    <span className="text-white/50 text-center flex-1 py-3 px-3 text-sm font-semibold transition-colors">
+                      {loading ? "Loading..." : error ? "Error loading user" : `${user.email || "User@gmail.com"}`}
+                    </span>
+                  </div>
+                )
+        }
+        
 
         {/* ── Mobile Toggle ── */}
         <button
@@ -309,20 +332,34 @@ export default function Navbar() {
             ))}
 
             {/* Mobile CTA */}
-            <div className="pt-2 pb-1 px-1 flex gap-2">
-              <Link 
-                to={"/signin"}
-                className="text-center flex-1 py-3 rounded-xl border border-white/10 text-white/60 hover:text-white text-sm font-semibold transition-colors"
-              >
-                Sign In
-              </Link>
-              <Link 
-                to={"/signup"}
-                className="text-center flex-1 py-3 rounded-xl bg-linear-to-r from-indigo-600 to-violet-600 text-white font-semibold text-sm shadow-[0_4px_20px_rgba(99,102,241,0.3)]"
-              >
-                  Get Started
-              </Link>
-            </div>
+            {
+              !user ? (
+              <div className="pt-2 pb-1 px-1 flex gap-2">
+                <Link 
+                  to={"/signin"}
+                  className="text-center flex-1 py-3 rounded-xl border border-white/10 text-white/60 hover:text-white text-sm font-semibold transition-colors"
+                >
+                  Sign In
+                </Link>
+                <Link 
+                  to={"/signup"}
+                  className="text-center flex-1 py-3 rounded-xl bg-linear-to-r from-indigo-600 to-violet-600 text-white font-semibold text-sm shadow-[0_4px_20px_rgba(99,102,241,0.3)]"
+                >
+                    Get Started
+                </Link>
+              </div>
+
+              ):(
+                  <div className="pt-2 pb-1 px-1 flex flex-col gap-2">
+                    <span className="bg-linear-to-r from-indigo-600 to-violet-600 text-white text-center flex-1 py-3 rounded-xl border border-white/10 text-sm font-semibold transition-colors">
+                      {loading ? "Loading..." : error ? "Error loading user" : `Hello, ${user.username.split(" ")[0].charAt(0).toUpperCase() + user.username.split(" ")[0].slice(1) || "User"}`}
+                    </span>
+                    <span className="text-white/50 text-center flex-1 py-3 px-3 text-sm font-semibold transition-colors">
+                      {loading ? "Loading..." : error ? "Error loading user" : `${user.email || "User@gmail.com"}`}
+                    </span>
+                  </div>
+                )
+            }
           </div>
         </div>
       )}

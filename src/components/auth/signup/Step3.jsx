@@ -21,13 +21,13 @@ export default function Step3({ allData, onBack, onDone }) {
     setLoading(true);
     try {
       await axios.post("http://localhost:1337/api/auth/local/register", {
-        username: `${allData.firstName}${allData.lastName}`.toLowerCase(),
+        username: `${allData.firstName} ${allData.lastName}`.toLowerCase(),
         email: allData.email,
         password: allData.password,
       });
       toast.success("Account created! Welcome to FreeLance 🎉");
       onDone();
-      setTimeout(() => navigate("/dashboard"), 3000);
+      setTimeout(() => navigate("/signin"), 3000);
     } catch (error) {
       toast.error(error.response?.data?.error?.message || "Registration failed. Please try again.");
     } finally {
