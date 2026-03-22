@@ -12,18 +12,18 @@ export default function QuickActions() {
 
   return (
     <div className={`${glass} rounded-2xl p-5`}>
-      <h3 className="text-white font-bold text-sm mb-4">Quick Actions</h3>
+      <h3 className="text-black dark:text-white font-bold text-sm mb-4">Quick Actions</h3>
       <div className="grid grid-cols-2 gap-2.5">
         {actions.map(({ label, icon: Icon, to, color }) => (
           <Link
             key={label}
             to={to}
-            className="group flex flex-col items-center gap-2 py-4 rounded-xl bg-white/3 border border-white/7 hover:bg-white/7 hover:border-white/15 transition-all duration-200"
+            className="group flex flex-col items-center gap-2 py-4 rounded-xl bg-black/15 dark:bg-white/3 border border-white/7 hover:bg-black/10 dark:hover:bg-white/7 hover:border-white/15 transition-all duration-200"
           >
-            <div className={`w-9 h-9 rounded-xl bg-linear-to-br ${color} flex items-center justify-center text-white shadow-lg`}>
+            <div className={`w-9 h-9 rounded-xl bg-linear-to-br ${color} flex items-center justify-center text-black dark:text-white shadow-lg`}>
               <Icon size={17} />
             </div>
-            <span className="text-white/60 group-hover:text-white text-xs font-semibold text-center transition-colors">{label}</span>
+            <span className="text-black/80 dark:text-white/60 group-hover:text-black dark:group-hover:text-white text-xs font-semibold text-center transition-colors">{label}</span>
           </Link>
         ))}
       </div>

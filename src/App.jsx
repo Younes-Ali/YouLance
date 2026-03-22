@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -12,8 +12,22 @@ import ClientsPage from "./pages/ClientsPage";
 import InvoicesPage from "./pages/InvoicesPage";
 import TimeTrackerPage from "./pages/TimeTrackerPage";
 import AnalyticsPage from "./pages/AnalyticsPage"
+import Settings from "./pages/Settings";
+import AssistantPage from "./pages/AssistantPage";
+import CalendarPage from "./pages/CalendarPage";
 
 function App() {
+
+
+  function PrivateRoute({ children }) {
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
+  if (!token) {
+    return <Navigate to="/signin" replace />;
+  }
+
+  return children;
+}
 
   return (
     <div
@@ -35,12 +49,15 @@ function App() {
               <Route path="about" element={<About/>}/>
               <Route path="contact" element={<Contact/>}/>
           </Route>
-          <Route path="/dashboard" element={ <OverviewPage /> } />
-          <Route path="/dashboard/projects"  element={ <ProjectsPage /> } />
-          <Route path="/dashboard/clients"   element={ <ClientsPage /> } />
-          <Route path="/dashboard/invoices"  element={ <InvoicesPage /> } />
-          <Route path="/dashboard/time"      element={ <TimeTrackerPage /> } />
-          <Route path="/dashboard/analytics" element={ <AnalyticsPage /> } />
+          <Route path="/dashboard" element={ <PrivateRoute><OverviewPage /></PrivateRoute> } />
+          <Route path="/dashboard/projects"  element={ <PrivateRoute><ProjectsPage /></PrivateRoute> } />
+          <Route path="/dashboard/clients"   element={ <PrivateRoute><ClientsPage /></PrivateRoute> } />
+          <Route path="/dashboard/invoices"  element={ <PrivateRoute><InvoicesPage /></PrivateRoute> } />
+          <Route path="/dashboard/time"      element={ <PrivateRoute><TimeTrackerPage /></PrivateRoute> } />
+          <Route path="/dashboard/analytics" element={ <PrivateRoute><AnalyticsPage /></PrivateRoute> } />
+          <Route path="/dashboard/assistant" element={<PrivateRoute><AssistantPage /></PrivateRoute>} />
+          <Route path="/dashboard/calendar" element={<PrivateRoute><CalendarPage /></PrivateRoute>} />
+          <Route path="/dashboard/settings"   element={ <Settings /> } />
           <Route path="/signin" element={<SignInPage/>}/>
           <Route path="/signup" element={<SignUpPage/>}/>
         </Routes>

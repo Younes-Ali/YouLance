@@ -35,6 +35,9 @@ export default function Step3({ allData, onBack, onDone }) {
     }
   };
 
+  localStorage.setItem("phone", allData.phone);
+  localStorage.setItem("bio", `Role: ${allData.role}, Experience: ${allData.experience} years`);
+
   return (
     <div>
       <StepBar step={2} />

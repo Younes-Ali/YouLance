@@ -2,14 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Briefcase, Menu, X, ChevronDown,
-  Zap, Clock, DollarSign, BarChart2, Shield, Users,
+  Zap, Clock, DollarSign, Users,
   Target, Rocket, Heart, Award,
-  LayoutDashboard, PieChart, ListChecks, FileText,
+  LayoutDashboard, PieChart, FileText,
   Mail, MessageCircle, Twitter, HelpCircle,
   FolderKanban,
 } from "lucide-react";
 import { glass } from "../../public/styles/PublicStyles";
-import useGetUser from "../hooks/useGetUser";
+import useUser from "../hooks/useGetUser";
 
 
 /* ─────────────────────────── NAV CONFIG ─────────────────────────── */
@@ -59,7 +59,6 @@ const navLinks = [
 ];
 
 
-const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
 /* ─────────────────────────── SMART NAVIGATE HOOK ─────────────────────────── */
 // Handles both plain routes (/dashboard) and hash routes (/#features, /about#team)
@@ -151,7 +150,7 @@ export default function Navbar() {
   const location = useLocation();
   const smartNavigate = useSmartNavigate();
 
-  const { user, loading, error } = useGetUser();
+  const { user, loading, error } = useUser();
 
 
 

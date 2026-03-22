@@ -62,12 +62,12 @@ export default function Grid() {
         <>
             {loading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="h-44 bg-white/5 rounded-2xl animate-pulse" />)}
+                    {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="h-44 bg-black/15 dark:bg-white/5 rounded-2xl animate-pulse" />)}
                 </div>
             ) : filtered.length === 0 ? (
                 <div className={`${glass} rounded-2xl p-16 text-center`}>
-                    <FolderKanban size={40} className="text-white/15 mx-auto mb-3" />
-                    <p className="text-white/35 text-sm">No projects found</p>
+                    <FolderKanban size={40} className="text-black/30 dark:text-white/15 mx-auto mb-3" />
+                    <p className="text-black/70 dark:text-white/35 text-sm">No projects found</p>
                     <button onClick={() => setModal({ open: true, project: null })}
                         className="mt-4 text-indigo-400 text-sm hover:text-indigo-300 transition-colors">
                         Create your first project →
@@ -87,7 +87,7 @@ export default function Grid() {
                                             {(attrs.name || "P")[0].toUpperCase()}
                                         </div>
                                         <div>
-                                            <p className="text-white font-bold text-sm">{attrs.name}</p>
+                                            <p className="text-black dark:text-white font-bold text-sm">{attrs.name}</p>
                                             <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${meta.bg} ${meta.color}`}>
                                                 {meta.label}
                                             </span>
@@ -95,26 +95,26 @@ export default function Grid() {
                                     </div>
                                     <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <button onClick={() => setModal({ open: true, project: p })}
-                                            className="w-7 h-7 rounded-lg bg-white/5 hover:bg-indigo-500/20 text-white/40 hover:text-indigo-400 flex items-center justify-center transition-all">
+                                            className="w-7 h-7 rounded-lg bg-black/15 dark:bg-white/5 hover:bg-indigo-500/20 text-black/70 dark:text-white/40 hover:text-indigo-400 flex items-center justify-center transition-all">
                                             <Edit2 size={12} />
                                         </button>
                                         <button onClick={() => handleDelete(p.id)}
-                                            className="w-7 h-7 rounded-lg bg-white/5 hover:bg-red-500/20 text-white/40 hover:text-red-400 flex items-center justify-center transition-all">
+                                            className="w-7 h-7 rounded-lg bg-black/15 dark:bg-white/5 hover:bg-red-500/20 text-black/70 dark:text-white/40 hover:text-red-400 flex items-center justify-center transition-all">
                                             <Trash2 size={12} />
                                         </button>
                                     </div>
                                 </div>
 
                                 {attrs.description && (
-                                    <p className="text-white/35 text-xs leading-relaxed mb-4 line-clamp-2">{attrs.description}</p>
+                                    <p className="text-black/75 dark:text-white/35 text-xs leading-relaxed mb-4 line-clamp-2">{attrs.description}</p>
                                 )}
 
                                 <div className="space-y-2">
-                                    <div className="flex justify-between text-xs text-white/40">
+                                    <div className="flex justify-between text-xs text-black/80 dark:text-white/40">
                                         <span>Progress</span>
                                         <span>{progress}%</span>
                                     </div>
-                                    <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
+                                    <div className="h-1.5 bg-black/12 dark:bg-white/8 rounded-full overflow-hidden">
                                         <div className="h-full bg-linear-to-r from-indigo-500 to-violet-600 rounded-full"
                                             style={{ width: `${progress}%` }} />
                                     </div>
@@ -122,10 +122,10 @@ export default function Grid() {
 
                                 <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/5">
                                     {attrs.budget && (
-                                        <span className="text-white/50 text-xs font-medium">${Number(attrs.budget).toLocaleString()}</span>
+                                        <span className="text-black/70 dark:text-white/50 text-xs font-medium">${Number(attrs.budget).toLocaleString()}</span>
                                     )}
                                     {attrs.deadline && (
-                                        <span className="text-white/30 text-xs flex items-center gap-1">
+                                        <span className="text-black/60 dark:text-white/30 text-xs flex items-center gap-1">
                                             <Clock size={10} /> {new Date(attrs.deadline).toLocaleDateString()}
                                         </span>
                                     )}

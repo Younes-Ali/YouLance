@@ -1,5 +1,6 @@
 import { ArrowRight, Zap, MessageSquare } from "lucide-react";
 import { glass } from "../../../public/styles/PublicStyles";
+import { Link } from "react-router-dom";
 
 
 
@@ -25,16 +26,16 @@ export default function CTABanner() {
               Join 12,000+ freelancers who've taken control of their business. No credit card required.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button className="group px-8 py-4 rounded-2xl bg-white text-indigo-700 font-bold text-sm hover:bg-white/90 transition-all duration-300 shadow-[0_4px_30px_rgba(255,255,255,0.2)] w-full sm:w-auto flex items-center justify-center gap-2">
+              <Link to={'/dashboard'} className="group px-8 py-4 rounded-2xl bg-white text-indigo-700 font-bold text-sm hover:bg-white/90 transition-all duration-300 shadow-[0_4px_30px_rgba(255,255,255,0.2)] w-full sm:w-auto flex items-center justify-center gap-2">
                 Get Started Free
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className={`px-8 py-4 rounded-2xl text-white font-semibold text-sm ${glass} hover:bg-white/10 transition-all duration-300 w-full sm:w-auto`}>
+              </Link>
+              <Link to={'/contact'} className={`px-8 py-4 rounded-2xl text-white font-semibold text-sm ${glass} hover:bg-white/10 transition-all duration-300 w-full sm:w-auto`}>
                 <span className="flex items-center justify-center gap-2">
                   <MessageSquare size={16} />
                   Talk to Sales
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

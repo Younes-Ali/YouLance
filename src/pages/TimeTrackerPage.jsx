@@ -12,11 +12,11 @@ import { glass } from "../../public/styles/PublicStyles";
 import useAppStore from "../store/storeEntries";
 
 const API   = "http://localhost:1337/api";
+
 const auth  = () => {
   const t = localStorage.getItem("token") || sessionStorage.getItem("token");
   return { headers: { Authorization: `Bearer ${t}` } };
 };
-
 
 
 /* ── TIME TRACKER PAGE ── */
@@ -70,7 +70,7 @@ export default function TimeTrackerPage() {
           
 
           <button onClick={() => setManualOpen(true)}
-            className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl ${glass} text-white/55 hover:text-white hover:bg-white/8 text-sm font-semibold transition-all border-dashed`}>
+            className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl ${glass} text-black/80 dark:text-white/55 hover:text-black dark:hover:text-white hover:bg-white/8 text-sm font-semibold transition-all border-dashed`}>
             <Plus size={15} /> Manual Entry
           </button>
         </div>
@@ -78,8 +78,8 @@ export default function TimeTrackerPage() {
         {/* Right: entries list */}
         <div className="lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-white font-bold text-base">Time Entries</h3>
-            <span className="text-white/30 text-xs">{entries.length} entries</span>
+            <h3 className="text-black dark:text-white font-bold text-base">Time Entries</h3>
+            <span className="text-black/60 dark:text-white/30 text-xs">{entries.length} entries</span>
           </div>
           <EntriesList entries={entries} loading={loading} onDelete={handleDelete} />
         </div>

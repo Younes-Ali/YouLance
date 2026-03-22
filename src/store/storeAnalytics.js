@@ -6,13 +6,17 @@ const useAppStore = create((set, get)=>({
     projects: [],
     clients:  [],
     entries:  [],
+    tasks:    [],
     loading:  false,
+    isDark: true,
 
     setInvoices: (invoices) => set({ invoices }),
     setProjects: (projects) => set({ projects }),
     setClients:  (clients)  => set({ clients }),
     setEntries:  (entries)  => set({ entries }),
+    setTasks:    (tasks)    => set({ tasks}),
     setLoading:  (loading)  => set({ loading }),
+    setIsDark:   (isDark)   => set({ isDark }),
 
     setData: ({ invoices, projects, clients, entries }) =>
     set({ invoices, projects, clients, entries }),

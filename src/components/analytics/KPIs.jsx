@@ -27,14 +27,14 @@ export default function KPIs() {
             <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               style={{ background: `radial-gradient(circle at 20% 30%, ${glow}, transparent 70%)` }} />
             <div className="relative flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-xl bg-linear-to-br ${color} flex items-center justify-center text-white shrink-0`}>
+              <div className={`w-10 h-10 rounded-xl bg-linear-to-br ${color} flex items-center justify-center text-black dark:text-white shrink-0`}>
                 <Icon size={18} />
               </div>
               <div>
-                <p className="text-white/40 text-xs uppercase tracking-wider">{label}</p>
+                <p className="text-black/80 dark:text-white/40 text-xs uppercase tracking-wider">{label}</p>
                 {loading
-                  ? <div className="w-16 h-5 bg-white/10 rounded animate-pulse mt-1" />
-                  : <p className="text-white font-black text-xl">{val}</p>
+                  ? <div className="w-16 h-5 bg-black/20 dark:bg-white/10 rounded animate-pulse mt-1" />
+                  : <p className="text-black dark:text-white font-black text-xl">{val}</p>
                 }
               </div>
             </div>

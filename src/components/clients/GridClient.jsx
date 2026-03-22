@@ -53,12 +53,12 @@ export default function GridClient() {
         <>
             {loading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="h-44 bg-white/5 rounded-2xl animate-pulse" />)}
+                    {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="h-44 bg-black/10 dark:bg-white/5 rounded-2xl animate-pulse" />)}
                 </div>
             ) : filtered.length === 0 ? (
                 <div className={`${glass} rounded-2xl p-16 text-center`}>
-                    <Users size={40} className="text-white/15 mx-auto mb-3" />
-                    <p className="text-white/35 text-sm">No clients found</p>
+                    <Users size={40} className="text-black/50 dark:text-white/15 mx-auto mb-3" />
+                    <p className="text-black/75 dark:text-white/35 text-sm">No clients found</p>
                     <button onClick={() => setModal({ open: true, client: null })}
                         className="mt-4 text-violet-400 text-sm hover:text-violet-300 transition-colors">
                         Add your first client →

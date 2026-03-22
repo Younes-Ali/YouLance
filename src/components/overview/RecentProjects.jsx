@@ -15,7 +15,7 @@ export default function RecentProjects({ projects, loading }) {
   return (
     <div className={`${glass} rounded-2xl overflow-hidden`}>
       <div className="flex items-center justify-between px-5 py-4 border-b border-white/6">
-        <h3 className="text-white font-bold text-sm">Recent Projects</h3>
+        <h3 className="text-black dark:text-white font-bold text-sm">Recent Projects</h3>
         <Link to="/dashboard/projects" className="text-indigo-400 text-xs hover:text-indigo-300 flex items-center gap-1 transition-colors">
           View all <ArrowRight size={12} />
         </Link>
@@ -28,7 +28,7 @@ export default function RecentProjects({ projects, loading }) {
       ) : projects.length === 0 ? (
         <div className="p-8 text-center">
           <FolderKanban size={32} className="text-white/15 mx-auto mb-2" />
-          <p className="text-white/30 text-sm">No projects yet</p>
+          <p className="text-black/60 dark:text-white/30 text-sm">No projects yet</p>
         </div>
       ) : (
         <div className="divide-y divide-white/4">
@@ -42,15 +42,15 @@ export default function RecentProjects({ projects, loading }) {
                   {(attrs.name || "P")[0].toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-white/85 text-sm font-medium truncate">{attrs.name}</p>
+                  <p className="text-black dark:text-white/85 text-sm font-medium truncate">{attrs.name}</p>
                   <div className="flex items-center gap-2 mt-1">
-                    <div className="flex-1 h-1 bg-white/8 rounded-full overflow-hidden">
+                    <div className="flex-1 h-1 bg-black/20 dark:bg-white/8 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-linear-to-r from-indigo-500 to-violet-600 rounded-full transition-all"
                         style={{ width: `${progress}%` }}
                       />
                     </div>
-                    <span className="text-white/30 text-xs">{progress}%</span>
+                    <span className="text-black/75 dark:text-white/30 text-xs">{progress}%</span>
                   </div>
                 </div>
                 <span className={`text-xs font-semibold px-2.5 py-1 rounded-full shrink-0 ${statusColor[status] || statusColor.pending}`}>

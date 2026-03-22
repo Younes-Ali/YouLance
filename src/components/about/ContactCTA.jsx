@@ -3,14 +3,11 @@ import { ArrowRight, Zap, Twitter, Mail, MessageCircle } from "lucide-react";
 import { glass, glassHover } from "../../../public/styles/PublicStyles";
 
   
-/* ══════════════════════════════════════════════════════════════
-   CONTACT / CTA
-══════════════════════════════════════════════════════════════ */
 export default function ContactCTA() {
   const channels = [
-    { icon: <Mail size={20} />, title: "Email Us", sub: "hello@freelanceapp.io", color: "from-indigo-500 to-indigo-700", glow: "rgba(99,102,241,0.4)" },
+    { icon: <Mail size={20} />, title: "Email Us", sub: "hello@youlanceapp.io", color: "from-indigo-500 to-indigo-700", glow: "rgba(99,102,241,0.4)" },
     { icon: <MessageCircle size={20} />, title: "Live Chat", sub: "Reply in under 2 hours", color: "from-violet-500 to-violet-700", glow: "rgba(139,92,246,0.4)" },
-    { icon: <Twitter size={20} />, title: "Twitter / X", sub: "@freelanceapp", color: "from-cyan-500 to-cyan-700", glow: "rgba(6,182,212,0.4)" },
+    { icon: <Twitter size={20} />, title: "Twitter / X", sub: "@youlanceapp", color: "from-cyan-500 to-cyan-700", glow: "rgba(6,182,212,0.4)" },
   ];
 
   return (

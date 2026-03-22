@@ -2,7 +2,7 @@ import { Form, Formik } from "formik";
 import StepBar from "./StepBar";
 import { Link } from "react-router-dom";
 import GlassField from "../GlassField";
-import { ArrowRight, Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, Lock, Mail, Phone, User } from "lucide-react";
 import * as Yup from "yup";
 import { useState } from "react";
 import { glass } from "../../../../public/styles/PublicStyles";
@@ -81,6 +81,7 @@ export default function Step1({ initialValues, onNext }) {
             </div>
 
             <GlassField label="Email Address" name="email" type="email" placeholder="alex@example.com" Icon={Mail} />
+            <GlassField label="Phone Number" name="phone" type="tel" placeholder="+1 (555) 123-4567" Icon={Phone} />
 
             {/* Password with strength */}
             <div>

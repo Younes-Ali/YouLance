@@ -9,7 +9,7 @@ export default function StatCard({ label, value, icon: Icon, color, glow, trend,
         style={{ background: `radial-gradient(circle at 20% 30%, ${glow}, transparent 70%)` }}
       />
       <div className="relative flex items-start justify-between mb-4 flex-wrap gap-2">
-        <div className={`w-10 h-10 rounded-xl bg-linear-to-br ${color} flex items-center justify-center text-white shadow-lg`}>
+        <div className={`w-10 h-10 rounded-xl bg-linear-to-br ${color} flex items-center justify-center text-black dark:text-white shadow-lg`}>
           <Icon size={18} />
         </div>
         {trend !== undefined && (
@@ -22,9 +22,9 @@ export default function StatCard({ label, value, icon: Icon, color, glow, trend,
         {loading ? (
           <div className="w-24 h-7 bg-white/5 rounded-lg animate-pulse mb-1" />
         ) : (
-          <p className="text-white font-black text-2xl mb-0.5">{prefix}{value?.toLocaleString()}{suffix}</p>
+          <p className="text-black dark:text-white font-black text-2xl mb-0.5">{prefix}{value?.toLocaleString()}{suffix}</p>
         )}
-        <p className="text-white/40 text-xs uppercase tracking-widest">{label}</p>
+        <p className="text-black/75 dark:text-white/40 text-xs uppercase tracking-widest">{label}</p>
       </div>
     </div>
   );

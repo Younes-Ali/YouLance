@@ -12,7 +12,7 @@ export default function RecentInvoices({ invoices, loading }) {
   return (
     <div className={`${glass} rounded-2xl overflow-hidden`}>
       <div className="flex items-center justify-between px-5 py-4 border-b border-white/6">
-        <h3 className="text-white font-bold text-sm">Recent Invoices</h3>
+        <h3 className="text-black dark:text-white font-bold text-sm">Recent Invoices</h3>
         <Link to="/dashboard/invoices" className="text-indigo-400 text-xs hover:text-indigo-300 flex items-center gap-1 transition-colors">
           View all <ArrowRight size={12} />
         </Link>
@@ -20,11 +20,11 @@ export default function RecentInvoices({ invoices, loading }) {
 
       {loading ? (
         <div className="p-5 space-y-3">
-          {[1, 2, 3].map(i => <div key={i} className="h-12 bg-white/5 rounded-xl animate-pulse" />)}
+          {[1, 2, 3].map(i => <div key={i} className="h-12 bg-black/15 dark:bg-white/5 rounded-xl animate-pulse" />)}
         </div>
       ) : invoices.length === 0 ? (
         <div className="p-8 text-center">
-          <p className="text-white/30 text-sm">No invoices yet</p>
+          <p className="text-black/50 dark:text-white/30 text-sm">No invoices yet</p>
         </div>
       ) : (
         <div className="divide-y divide-white/4">
@@ -32,13 +32,13 @@ export default function RecentInvoices({ invoices, loading }) {
             const attrs = inv.attributes || inv;
             const status = attrs.state || "pending";
             return (
-              <div key={inv.id} className="flex items-center gap-4 px-5 py-3.5 hover:bg-white/3 transition-colors">
+              <div key={inv.id} className="flex items-center gap-4 px-5 py-3.5 hover:bg-black/10 dark:hover:bg-white/3 transition-colors">
                 <div className="flex-1 min-w-0">
-                  <p className="text-white/85 text-sm font-medium">{attrs.number || `INV-${inv.id}`}</p>
-                  <p className="text-white/35 text-xs truncate">{attrs.clientName || attrs.client?.data?.attributes?.name || "—"}</p>
+                  <p className="text-black/90 dark:text-white/85 text-sm font-medium">{attrs.number || `INV-${inv.id}`}</p>
+                  <p className="text-black/60 dark:text-white/35 text-xs truncate">{attrs.clientName || attrs.client?.data?.attributes?.name || "—"}</p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-white font-bold text-sm">${(attrs.amount || 0).toLocaleString()}</p>
+                  <p className="text-black dark:text-white font-bold text-sm">${(attrs.amount || 0).toLocaleString()}</p>
                   <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${statusStyle[status] || statusStyle.pending}`}>
                     {status}
                   </span>
