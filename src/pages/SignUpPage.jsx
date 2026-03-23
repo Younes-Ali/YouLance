@@ -13,7 +13,7 @@ export default function SignUpPage() {
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [allData, setAllData] = useState({
-    firstName: "", lastName: "", email: "", password: "", confirmPassword: "",
+    firstName: "", lastName: "", email: "", password: "", confirmPassword: "", phone: "",
     role: "", experience: "",
   });
 

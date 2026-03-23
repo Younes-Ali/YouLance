@@ -113,7 +113,6 @@ function ProgressField() {
   );
 }
 
-/* ── PROJECT MODAL ── */
 export default function ProjectModal({ open, onClose, project, onSaved }) {
   if (!open) return null;
   const isEdit = !!project;
