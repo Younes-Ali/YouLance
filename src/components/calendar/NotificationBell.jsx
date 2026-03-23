@@ -2,6 +2,7 @@ import { Bell, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import useAppStore from "../../store/storeTask";
 import { TASK_TYPES } from "../../utils/taskHelpers";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -9,6 +10,7 @@ export default function NotificationBell({ header = false }) {
     const tasks = useAppStore(state => state.tasks);
     const [open, setOpen] = useState(false);
     const ref = useRef(null);
+    const navigate = useNavigate()
 
     const today    = new Date().toISOString().split("T")[0];
     const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
@@ -32,7 +34,7 @@ export default function NotificationBell({ header = false }) {
 
             {/* Bell button */}
             <button
-                onClick={() => { if (header) return; setOpen(!open); }}
+                onClick={() => { if (header) navigate("/dashboard/calendar"); setOpen(!open); }}
                 className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all border
                     bg-slate-100 border-slate-200 text-black/60 hover:text-black/85
                     dark:bg-white/5 dark:border-white/10 dark:text-white/60 dark:hover:text-white"
